@@ -1,29 +1,104 @@
-GET http://localhost:5000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJNIEFsbGFtIiwiZW1haWwiOiJhbGxhbUBnbWFpbC5jb20iLCJpYXQiOjE2Nzk1ODM5NTUsImV4cCI6MTY3OTU4Mzk3MH0.UWfyympACWoMBQtRfHOJ7lcjrZNaTGHVa4KQVrMMons
-
-###
+//create user
 POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "name": "M Allam 2",
-    "email": "allam1@gmail.com",
+    "name": "allam admin",
+    "email": "admin@gmail.com",
     "password": "123456",
-    "confPassword": "123456"
+    "confPassword": "123456",
+    "role": "admin"
 }
 
 ###
+// get all user
+GET http://localhost:5000/users
+
+###
+//get single user
+GET http://localhost:5000/users/869d8c30-e209-42db-a804-0c65f9eed155
+
+###
+//update user
+PATCH http://localhost:5000/users/1acdec5d-eaf4-4c7f-a9c4-2ab1d8739305
+Content-Type: application/json
+
+{
+    "name": "allam user update",
+    "email": "user@gmail.com",
+    "password": "",
+    "confPassword": "",
+    "role": "user"
+}
+
+###
+// delete user
+DELETE http://localhost:5000/users/1acdec5d-eaf4-4c7f-a9c4-2ab1d8739305
+
+
+###
+// login
 POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email" : "allam@gmail.com",
-    "password" : "123456"
+    "email": "admin@gmail.com",
+    "password": "123456"
 }
 
 ###
-GET http://localhost:5000/token
+// login
+POST http://localhost:5000/login
+Content-Type: application/json
 
+{
+    "email": "user@gmail.com",
+    "password": "123456"
+}
+
+###
+GET http://localhost:5000/me
 
 ###
 DELETE http://localhost:5000/logout
+
+
+###
+//get all task
+GET http://localhost:5000/task
+
+###
+//post data task
+POST http://localhost:5000/task
+Content-Type: application/json
+
+{
+    "date": "2023-03-20",
+    "start": "05:29",
+    "end": "06:39",
+    "client": "PT Akula 4",
+    "project": "Mytask 4",
+    "taskDescription": "myyytask deskription 3"
+}
+
+###
+//get single task
+GET http://localhost:5000/task/6409a0d9-4efa-4b56-9d63-4448390beea8
+
+###
+//post data task
+PATCH http://localhost:5000/task/6409a0d9-4efa-4b56-9d63-4448390beea8
+Content-Type: application/json
+
+{
+    "date": "2023-03-20",
+    "start": "05:29",
+    "end": "06:39",
+    "client": "PT Akula update",
+    "project": "Mytask 4",
+    "taskDescription": "myyytask deskription 3"
+}
+
+###
+//post data task
+DELETE http://localhost:5000/task/6409a0d9-4efa-4b56-9d63-4448390beea8
