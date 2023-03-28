@@ -93,3 +93,33 @@ export const deleteUsers = async(req, res) => {
         res.status(400).json({msg: error.message});
     }
 }
+
+export const changePassword = async(req, res) => {
+    const user = await Users.findOne({
+        where: {
+            uuid: req.params.id
+        }
+    });
+    if(!user) return res.status(404).json({msg: "user tidak ditemukan"});
+    const {password, confPassword} = req.body;
+    let hashPassword;
+    if(password === "" || password === null){
+        hashPassword = user.password
+    }else{
+        hashPassword = await argon2.hash(password);
+    }
+    if(password !== confPassword) return res.status(400).json({msg: "Password dan Confirm Password tidak cocok"});
+    try {
+        await Users.update({
+            password: hashPassword
+        },
+        {
+            where:{
+                id: user.id
+            }
+        });
+        res.status(200).json({msg: "Password updated"});
+    } catch (error) {
+        res.status(400).json({msg: error.message});
+    }
+}

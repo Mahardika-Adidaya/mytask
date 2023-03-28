@@ -53,7 +53,7 @@ Content-Type: application/json
 
 {
     "email": "user@gmail.com",
-    "password": "123456"
+    "password": "654321"
 }
 
 ###
@@ -102,3 +102,13 @@ Content-Type: application/json
 ###
 //post data task
 DELETE http://localhost:5000/task/6409a0d9-4efa-4b56-9d63-4448390beea8
+
+###
+//change-password
+PATCH http://localhost:5000/change-password/7cd28f5a-e5f8-4c7c-8473-3281b99598d9
+Content-Type: application/json
+
+{
+    "password": "121212",
+    "confPassword": "121212"
+}
