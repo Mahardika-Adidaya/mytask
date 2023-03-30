@@ -53,7 +53,7 @@ Content-Type: application/json
 
 {
     "email": "user@gmail.com",
-    "password": "654321"
+    "password": "121212"
 }
 
 ###
@@ -65,7 +65,7 @@ DELETE http://localhost:5000/logout
 
 ###
 //get all task
-GET http://localhost:5000/task
+GET http://localhost:5000/task?startDate=2023-03-30&endDate=2023-03-30
 
 ###
 //post data task
@@ -73,11 +73,11 @@ POST http://localhost:5000/task
 Content-Type: application/json
 
 {
-    "date": "2023-03-20",
+    "date": "2023-03-31",
     "start": "05:29",
     "end": "06:39",
-    "client": "PT Akula 4",
-    "project": "Mytask 4",
+    "client": "PT 2",
+    "project": "Mytask 2",
     "taskDescription": "myyytask deskription 3"
 }
 
@@ -112,3 +112,7 @@ Content-Type: application/json
     "password": "121212",
     "confPassword": "121212"
 }
+
+###
+//get task by date
+GET http://localhost:5000/taskdate/2023-03-26
