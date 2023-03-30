@@ -26,7 +26,10 @@ export const getTask = async(req, res) => {
             response = await Task.findAll({
                 attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
                 where:{
-                    userId: req.userId
+                    userId: req.userId,
+                    date: {
+                        [Op.between]: [startDate, endDate]
+                        }
                 },
                 include:[{
                     model: Users,
