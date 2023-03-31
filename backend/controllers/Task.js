@@ -1,12 +1,49 @@
 import Task from "../models/TaskModel.js"; 
 import Users from "../models/UserModel.js";
-import {Op} from "sequelize";
+import {Op, TIME} from "sequelize";
 
 
 export const getTask = async(req, res) => {
+    try {
+        let response;
+        if(req.role === "admin"){
+            response = await Task.findAll({
+                attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
+                include:[{
+                    model: Users,
+                    attributes:['name', 'email'],
+                }]
+            });
+        }else{
+            response = await Task.findAll({
+                attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
+                where:{
+                    userId: req.userId
+                },
+                include:[{
+                    model: Users,
+                    attributes:['name', 'email'],
+                }]
+            });
+        }
+        // response.push(total);
+        res.status(200).json(response);    
+    } catch (error) {
+        res.status(500).json({msg: error.message});
+    }
+}
+
+export const getTaskByDate = async(req, res) => {
     const startDate = new Date(req.query.startDate);
     const endDate = new Date(req.query.endDate);
-    // res.status(200).json(req.params.startDate);
+    const start = new TIME('08:30:00'); // waktu mulai
+    const end = new TIME('10:30:00'); // waktu selesai
+    const diffInMs = end - start; // hitung selisih waktu dalam milidetik
+    const diffInSec = diffInMs / 1000; // konversi ke detik
+    const diffInMin = diffInSec / 60; // konversi ke menit
+    const diffInHours = diffInMin / 60; // konversi ke jam
+    const total = `Durasi: ${Math.floor(diffInHours)} jam, ${Math.floor(diffInMin % 60)} menit, ${Math.floor(diffInSec % 60)} detik`;
+    // res.status(200).json({msg: "dkfkjdsncsdc"});
     try {
         let response;
         if(req.role === "admin"){
@@ -37,7 +74,8 @@ export const getTask = async(req, res) => {
                 }]
             });
         }
-        res.status(200).json(response);
+        // response.push(total);
+        res.status(200).json(response);    
     } catch (error) {
         res.status(500).json({msg: error.message});
     }
@@ -157,44 +195,6 @@ export const deleteTask = async (req, res) => {
     }
 }
 
-export const getTaskByDate = async(req, res) => {
-    try {
-        const task = await Task.findAll({
-            where:{
-                date: task.date
-            }
-        });
-        if(!task) return res.status(404).json({msg: "Data tidak ditemukan"})
-        let response;
-        if(req.role === "admin"){
-            response = await Task.findAll({
-                attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
-                where:{
-                    id: task.id,
-                    date: task.date
-                },
-                include:[{
-                    model: Users,
-                    attributes:['name', 'email'],
-                }]
-            });
-        }else{
-            response = await Task.findOne({
-                attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
-                where:{
-                    [Op.and]:[{id: task.id}, {userId: req.userId}]                    
-                },
-                include:[{
-                    model: Users,
-                    attributes:['name', 'email'],
-                }]
-            });
-        }
-        res.status(200).json(response);
-    } catch (error) {
-        res.status(500).json({msg: error.message});
-    }
-}
 
 // const fs = require('fs');
 // const pdf = require('pdf-creator-node');
