@@ -1,6 +1,7 @@
 import Task from "../models/TaskModel.js"; 
 import Users from "../models/UserModel.js";
-import {Op, TIME} from "sequelize";
+import {Op} from "sequelize";
+import moment from "moment";
 
 
 export const getTask = async(req, res) => {
@@ -8,7 +9,10 @@ export const getTask = async(req, res) => {
         let response;
         if(req.role === "admin"){
             response = await Task.findAll({
-                attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
+                // attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription', ],
+                attributes:{
+                    exclude:['createdAt','updatedAt']
+                },
                 include:[{
                     model: Users,
                     attributes:['name', 'email'],
@@ -16,7 +20,10 @@ export const getTask = async(req, res) => {
             });
         }else{
             response = await Task.findAll({
-                attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
+                // attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
+                attributes:{
+                    exclude:['createdAt','updatedAt' ]
+                },
                 where:{
                     userId: req.userId
                 },
@@ -36,14 +43,6 @@ export const getTask = async(req, res) => {
 export const getTaskByDate = async(req, res) => {
     const startDate = new Date(req.query.startDate);
     const endDate = new Date(req.query.endDate);
-    const start = new TIME('08:30:00'); // waktu mulai
-    const end = new TIME('10:30:00'); // waktu selesai
-    const diffInMs = end - start; // hitung selisih waktu dalam milidetik
-    const diffInSec = diffInMs / 1000; // konversi ke detik
-    const diffInMin = diffInSec / 60; // konversi ke menit
-    const diffInHours = diffInMin / 60; // konversi ke jam
-    const total = `Durasi: ${Math.floor(diffInHours)} jam, ${Math.floor(diffInMin % 60)} menit, ${Math.floor(diffInSec % 60)} detik`;
-    // res.status(200).json({msg: "dkfkjdsncsdc"});
     try {
         let response;
         if(req.role === "admin"){
@@ -75,6 +74,7 @@ export const getTaskByDate = async(req, res) => {
             });
         }
         // response.push(total);
+        // console.log(total);
         res.status(200).json(response);    
     } catch (error) {
         res.status(500).json({msg: error.message});
@@ -120,7 +120,12 @@ export const getTaskById = async(req, res) => {
 }
 
 export const createTask = async(req, res) => {
+    
     const { date, start, end, client, project, taskDescription } = req.body;
+    const startTime = moment(start);
+    const endTime = moment(end);
+    const diffInMinutes = endTime.diff(startTime, 'minutes');
+    const diffInhours = endTime.diff(startTime, 'hours');
     try {
         await Task .create({
             date: date,
@@ -129,6 +134,7 @@ export const createTask = async(req, res) => {
             client: client,
             project: project,
             taskDescription: taskDescription,
+            durasi: `${Math.floor(diffInhours)} jam, ${Math.floor(diffInMinutes % 60)} menit`,
             userId: req.userId
         });
         res.status(201).json({msg: "Task created sukses"});
@@ -194,31 +200,3 @@ export const deleteTask = async (req, res) => {
         res.status(500).json({msg: error.message});
     }
 }
-
-
-// const fs = require('fs');
-// const pdf = require('pdf-creator-node');
-// const path = require('path');
-
-// export const generatePdf = async(req, res, next) => {
-//     const html = fs.readFileSync(patch.join(__dirname, '.....'), 'utf-8');
-//     const filename = Match.random() + '_doc' + '.pdf';
-
-//     data.forEach(d => {
-//         const prod ={
-//             date: d.date,
-//             start: d.start,
-//             end: d.end,
-//             project: project,
-//             taskDescription: taskDescription
-//         }
-//         array.push(prod);
-//     });
-//     // const document ={
-//     //     html: html,
-//     //     data: {
-//     //         task: obj
-//     //     },
-//     //     path: ''
-//     // }
-// }

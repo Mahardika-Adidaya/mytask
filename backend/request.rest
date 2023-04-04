@@ -3,11 +3,23 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "name": "allam admin",
+    "name": "admin",
     "email": "admin@gmail.com",
     "password": "123456",
     "confPassword": "123456",
     "role": "admin"
+}
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "user 2",
+    "email": "use2@gmail.com",
+    "password": "123456",
+    "confPassword": "123456",
+    "role": "user"
 }
 
 ###
@@ -37,7 +49,7 @@ DELETE http://localhost:5000/users/1acdec5d-eaf4-4c7f-a9c4-2ab1d8739305
 
 
 ###
-// login
+// login admin
 POST http://localhost:5000/login
 Content-Type: application/json
 
@@ -47,13 +59,13 @@ Content-Type: application/json
 }
 
 ###
-// login
+// login user
 POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "user@gmail.com",
-    "password": "121212"
+    "email": "use2@gmail.com",
+    "password": "123456"
 }
 
 ###
@@ -77,11 +89,11 @@ POST http://localhost:5000/task
 Content-Type: application/json
 
 {
-    "date": "2023-03-31",
-    "start": "05:29",
-    "end": "06:39",
-    "client": "PT 2",
-    "project": "Mytask 2",
+    "date": "2023-04-06",
+    "start": "2023-04-05 04:29:00",
+    "end": "2023-04-05 06:39:00",
+    "client": "PT 44",
+    "project": "Mytask 622",
     "taskDescription": "myyytask deskription 3"
 }
 
@@ -119,4 +131,4 @@ Content-Type: application/json
 
 ###
 //get task by date
-GET http://localhost:5000/taskdate/2023-03-26
+GET http://localhost:5000/taskdate/2023-04-01

@@ -22,15 +22,22 @@ const Task = db.define('task',{
         }
     },
     start:{
-        type: DataTypes.TIME,
+        type: DataTypes.DATE,
         allowNull: false,
         validate:{
             notEmpty: true
         }
     },
     end:{
-        type: DataTypes.TIME,
+        type: DataTypes.DATE,
         allowNull: false,
+        validate:{
+            notEmpty: true
+        }
+    },
+    durasi:{
+        type: DataTypes.STRING,
+        allowNull: true,
         validate:{
             notEmpty: true
         }
