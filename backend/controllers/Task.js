@@ -62,7 +62,9 @@ export const getTaskByDate = async(req, res) => {
             });
         }else{
             response = await Task.findAll({
-                attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
+                attributes:{
+                    exclude:['createdAt','updatedAt']
+                },
                 where:{
                     userId: req.userId,
                     date: {
