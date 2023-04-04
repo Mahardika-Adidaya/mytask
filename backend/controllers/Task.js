@@ -52,7 +52,9 @@ export const getTaskByDate = async(req, res) => {
                     [Op.between]: [startDate, endDate]
                     }
                 },
-                attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
+                attributes:{
+                    exclude:['createdAt','updatedAt']
+                },
                 include:[{
                     model: Users,
                     attributes:['name', 'email'],
@@ -134,7 +136,8 @@ export const createTask = async(req, res) => {
             client: client,
             project: project,
             taskDescription: taskDescription,
-            durasi: `${Math.floor(diffInhours)} jam, ${Math.floor(diffInMinutes % 60)} menit`,
+            // durasi: `${Math.floor(diffInhours)} jam, ${Math.floor(diffInMinutes % 60)} menit`,
+            durasi: moment().format(),
             userId: req.userId
         });
         res.status(201).json({msg: "Task created sukses"});
