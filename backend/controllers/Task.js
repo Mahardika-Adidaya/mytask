@@ -137,8 +137,8 @@ export const createTask = async(req, res) => {
             end: end,
             client: client,
             project: project,
-            taskDescription: taskDescription,
-            // durasi: `${Math.floor(diffInhours)} jam, ${Math.floor(diffInMinutes % 60)} menit`,
+            // taskDescription: taskDescription,
+            durasi: `${Math.floor(diffInhours)} jam, ${Math.floor(diffInMinutes % 60)} menit`,
             durasi: moment().format(),
             userId: req.userId
         });
