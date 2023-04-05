@@ -171,6 +171,7 @@ export const createTask = async(req, res) => {
             project: project,
             taskDescription: taskDescription,
             durasi: `${Math.floor(diffInhours)} jam, ${Math.floor(diffInMinutes % 60)} menit`,
+            menit: `${Math.floor(diffInMinutes)}`,
             userId: req.userId
         });
         res.status(201).json({msg: "Task created sukses"});
