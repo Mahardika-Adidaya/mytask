@@ -35,9 +35,25 @@ class Api {
         })
     }
 
+    // GET USER
+    static User(id) {
+        let path = `users/${id}`;
+        return request(`${this.urlAPI()}${path}`, {
+            method: 'GET',
+        })
+    }
+
     // Begin :: Auth
     static getTask(data) {
         let path = 'task';
+        return request(`${this.urlAPI()}${path}`, {
+            method: 'GET',
+        })
+    }
+
+    // GET Filter Task
+    static getFilterTask(startDate, endDate) {
+        let path = `taskDate?startDate=${startDate}&endDate=${endDate}`;
         return request(`${this.urlAPI()}${path}`, {
             method: 'GET',
         })
@@ -61,8 +77,8 @@ class Api {
     }
 
     // UPDATE password
-    static UpdatePassword(data) {
-        let path = 'change-password';
+    static UpdatePassword(data, id) {
+        let path = `change-password/${id}`;
         return request(`${this.urlAPI()}${path}`, {
             method: 'PATCH',
             data,

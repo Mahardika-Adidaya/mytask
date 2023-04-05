@@ -15,8 +15,8 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "name": "user 2",
-    "email": "use2@gmail.com",
+    "name": "user3",
+    "email": "user3@gmail.com",
     "password": "123456",
     "confPassword": "123456",
     "role": "user"
@@ -90,8 +90,8 @@ Content-Type: application/json
 
 {
     "date": "2023-04-06",
-    "start": "2023-04-05 04:29:00",
-    "end": "2023-04-05 06:39:00",
+    "start": "2023-04-05 06:10:00",
+    "end": "2023-04-05 08:10:00",
     "client": "PT 44",
     "project": "Mytask 622",
     "taskDescription": "myyytask deskription 3"
@@ -117,8 +117,7 @@ Content-Type: application/json
 
 ###
 //post data task
-DELETE http://localhost:5000/task/6409a0d9-4efa-4b56-9d63-4448390beea8
-
+DELETE http://localhost:5000/task/362cb2af-3d45-4f0e-91cb-b585bf2d2ce7
 ###
 //change-password
 PATCH http://localhost:5000/change-password/7cd28f5a-e5f8-4c7c-8473-3281b99598d9

@@ -49,7 +49,7 @@ export const getTask = async(req, res) => {
             hours = Math.floor(totalMenit / 60);
             minutes = totalMenit % 60;
         }
-        res.status(200).json({response, durasi:`${hours} jam, ${minutes} menit`});    
+        res.status(200).json({response, durasiTotal:`${hours} jam, ${minutes} menit`});    
     } catch (error) {
         res.status(500).json({msg: error.message});
     }
