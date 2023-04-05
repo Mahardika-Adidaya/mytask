@@ -42,6 +42,13 @@ const Task = db.define('task',{
             notEmpty: true
         }
     },
+    menit:{
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        validate:{
+            notEmpty: true
+        }
+    },
     client:{
         type: DataTypes.STRING,
         allowNull: false,
