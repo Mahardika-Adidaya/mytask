@@ -5,11 +5,13 @@ import moment from "moment";
 
 
 export const getTask = async(req, res) => {
+    let totalMenit = 0;
+    let minutes;
+    let hours;
     try {
         let response;
         if(req.role === "admin"){
             response = await Task.findAll({
-                // attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription', ],
                 attributes:{
                     exclude:['createdAt','updatedAt']
                 },
@@ -17,10 +19,17 @@ export const getTask = async(req, res) => {
                     model: Users,
                     attributes:['name', 'email'],
                 }]
+            }).then((result)=>{
+                result.map((data)=>{
+                    totalMenit += Number(data.menit)
+                });
+                return result;
             });
+            hours = Math.floor(totalMenit / 60);
+            minutes = totalMenit % 60;
+            // console.log(menit);
         }else{
             response = await Task.findAll({
-                // attributes:['uuid', 'date', 'start', 'end', 'client', 'project', 'taskDescription'],
                 attributes:{
                     exclude:['createdAt','updatedAt' ]
                 },
@@ -31,10 +40,16 @@ export const getTask = async(req, res) => {
                     model: Users,
                     attributes:['name', 'email'],
                 }]
+            }).then((result)=>{
+                result.map((data)=>{
+                    totalMenit += Number(data.menit)
+                });
+                return result;
             });
+            hours = Math.floor(totalMenit / 60);
+            minutes = totalMenit % 60;
         }
-        // response.push(total);
-        res.status(200).json(response);    
+        res.status(200).json({response, durasi:`${hours} jam, ${minutes} menit`});    
     } catch (error) {
         res.status(500).json({msg: error.message});
     }
@@ -43,6 +58,9 @@ export const getTask = async(req, res) => {
 export const getTaskByDate = async(req, res) => {
     const startDate = new Date(req.query.startDate);
     const endDate = new Date(req.query.endDate);
+    let totalMenit = 0;
+    let minutes;
+    let hours;
     try {
         let response;
         if(req.role === "admin"){
@@ -59,7 +77,14 @@ export const getTaskByDate = async(req, res) => {
                     model: Users,
                     attributes:['name', 'email'],
                 }]
+            }).then((result)=>{
+                result.map((data)=>{
+                    totalMenit += Number(data.menit)
+                });
+                return result;
             });
+            hours = Math.floor(totalMenit / 60);
+            minutes = totalMenit % 60;
         }else{
             response = await Task.findAll({
                 attributes:{
@@ -75,11 +100,18 @@ export const getTaskByDate = async(req, res) => {
                     model: Users,
                     attributes:['name', 'email'],
                 }]
+            }).then((result)=>{
+                result.map((data)=>{
+                    totalMenit += Number(data.menit)
+                });
+                return result;
             });
+            hours = Math.floor(totalMenit / 60);
+            minutes = totalMenit % 60;;
         }
-        // response.push(total);
         // console.log(total);
-        res.status(200).json(response);    
+        // res.status(200).json(response);
+        res.status(200).json({response, durasi:`${hours} jam, ${minutes} menit`});    
     } catch (error) {
         res.status(500).json({msg: error.message});
     }
