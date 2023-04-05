@@ -43,7 +43,7 @@ const Task = db.define('task',{
         }
     },
     menit:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
         validate:{
             notEmpty: true
