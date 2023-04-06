@@ -111,7 +111,7 @@ export const getTaskByDate = async(req, res) => {
         }
         // console.log(total);
         // res.status(200).json(response);
-        res.status(200).json({response, durasi:`${hours} jam, ${minutes} menit`});    
+        res.status(200).json({response, durasiTotal:`${hours} jam, ${minutes} menit`});    
     } catch (error) {
         res.status(500).json({msg: error.message});
     }

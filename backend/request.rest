@@ -81,7 +81,7 @@ GET http://localhost:5000/task
 
 ###
 //get task by date
-GET http://localhost:5000/taskdate?startDate=2023-03-30&endDate=2023-03-30
+GET http://localhost:5000/taskdate?startDate=2023-04-04&endDate=2023-04-05
 
 ###
 //post data task
@@ -116,8 +116,9 @@ Content-Type: application/json
 }
 
 ###
-//post data task
+//DELETE data task
 DELETE http://localhost:5000/task/362cb2af-3d45-4f0e-91cb-b585bf2d2ce7
+
 ###
 //change-password
 PATCH http://localhost:5000/change-password/7cd28f5a-e5f8-4c7c-8473-3281b99598d9

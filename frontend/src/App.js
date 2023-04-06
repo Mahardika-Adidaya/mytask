@@ -6,12 +6,14 @@ import Login from './pages/Login';
 import Main from './pages/Main';
 import Test from './pages/Test';
 import ViewTask from './pages/ViewTask';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
     <div>
       <Routes>
         <Route name='LoginPage' path="/" element={<Login/>}/>
+        <Route name='Daftar' path="/daftar" element={<SignUp/>}/>
         <Route name='InputTask' path="/input-task" element={<Main/>}/>
         <Route name='ViewTask' path="/input-task/view-task" element={<ViewTask/>}/>
         <Route name='ChangePassword' path="/change-password" element={<ChangePassword/>}/>

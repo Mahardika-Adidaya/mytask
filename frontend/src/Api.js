@@ -43,6 +43,16 @@ class Api {
         })
     }
 
+    //POST USER
+    static postUser(data) {
+        let path = 'users';
+        return request(`${this.urlAPI()}${path}`, {
+            method: 'POST',
+            data,
+        })
+    }
+
+
     // Begin :: Auth
     static getTask(data) {
         let path = 'task';
@@ -85,6 +95,11 @@ class Api {
         })
     }
 
-
+    static DeleteTask(id){
+        let path = `task/${id}`;
+        return request(`${this.urlAPI()}${path}`,{
+            method: 'DELETE',
+        })
+    }
 }
 export default Api;

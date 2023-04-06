@@ -16,7 +16,6 @@ const Main = () =>{
 
     const addTask = async (e) =>{
 
-        
         try {
             const task ={
                 date: today,
@@ -31,26 +30,23 @@ const Main = () =>{
             const response = await Api.Task(task)
             alert('Submit berhasil!');
             
-
         } catch (error) {
             console.log(error)
         }
-
-
     }
 
     return(
         <div>
             <Navbar />
-                <div className="container px-[342px] font-poppins">
-                    <div clasName="mt-12">
-                        <div className="flex items-center pt-32 ">
-                            <h1 className="text-[32px] font-semibold mr-[500px]">Entry Task</h1>
+                <div className="container mx-auto w-full px-6 md:px-[342px] font-poppins">
+                    {/* <div clasName="mt-12"> */}
+                        <div className="flex justify-between items-center pt-[123px]">
+                            <h1 className="text-[32px] font-semibold">Entry Task</h1>
                             <Link to='view-task'>
-                                <button className="bg-[#EB0019] rounded-full text-white w-[100px] h-[36px] text-[14px] font-medium mt-auto">View Task</button>
+                                <button className="bg-[#EB0019] text-white w-[150px] h-[36px] text-[14px] font-medium rounded-full ">View Task</button>
                             </Link>
                         </div>
-                    </div>
+                    {/* </div> */}
 
                     {/* <div className="mt-[24px] mb-[15px]">
                         <h1 className="text-[20px] font-medium mb-[2px]">Date</h1>
