@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Api from "../Api";
-import GambarBuku from "D:/KULIAH/SEMESTER 6 - MAGANG INSYAALLAH/daily-employee-report/src/assets/book.png"
 
 const Navbar = () => {
 
@@ -41,7 +40,7 @@ const Navbar = () => {
             <div className="h-[88px] w-full bg-[#EB0019] fixed flex lg:justify-between items-center justify-between px-5 lg:px-9">
                 <Link to='/input-task'>
                      <div class="flex">
-                         <img src={GambarBuku} class="h-9 mr-1 lg:mr-3 " alt="Flowbite Logo" />
+                         {/* <img class="h-9 mr-1 lg:mr-3 " alt="Flowbite Logo" /> */}
                          <span class="self-center text-[24px] font-semibold whitespace-nowrap dark:text-white text-white">My Task</span>
                      </div>
                  </Link>

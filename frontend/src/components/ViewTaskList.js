@@ -7,6 +7,7 @@ const ViewTaskList = ({startDate, endDate}) => {
  const [afterFilter, setAfterFilter] = useState('')
  const [durasi, setDurasi] = useState()
  const [filterDurasi, setFilterDurasi] = useState()
+//  const [uuid, setUuid] = useState()
 
  const navigate = useNavigate()
     const goto = () =>{
@@ -19,7 +20,7 @@ const ViewTaskList = ({startDate, endDate}) => {
             if(!startDate || !endDate) {
                 const response = await Api.getTask()
                 setData(response.data.response)
-                console.log(response.data.response)
+                console.log(response.data.response.id)
                 
             } else {
                 const filter = await Api.getFilterTask(startDate, endDate)
@@ -70,7 +71,7 @@ const ViewTaskList = ({startDate, endDate}) => {
     // const delTask = async() => {
     //     try{
     //         const task = await Api.getTask()
-    //         const response = await Api.DeleteTask(response.data.response.uuid)
+    //         const response = await Api.DeleteTask(task.data.response.uuid)
     //         console.log("task terhapus")
     //     }
     //     catch (error){
@@ -139,7 +140,7 @@ const ViewTaskList = ({startDate, endDate}) => {
                     }
                 </div>
              
-                <div className='flex relative text-[16px] font-semibold mb-[16px]'>
+                {/* <div className='flex relative text-[16px] font-semibold mb-[16px]'>
                         <h1>Total Work Duration</h1>
                         {filterDurasi ? (
                             <h1 className='absolute right-0'>{filterDurasi}</h1>
@@ -170,7 +171,7 @@ const ViewTaskList = ({startDate, endDate}) => {
                             ) : (
                             <h1 className='absolute right-0'>{durasi}</h1>
                         )}
-                </div>
+                </div> */}
 
                 <div className='flex item-center justify-center'>
                     <button onClick={goto} type="submit" className=" bg-red-500 w-[366px] h-[50px] rounded-lg font-medium text-white">Export</button>
