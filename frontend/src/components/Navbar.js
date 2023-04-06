@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Api from "../Api";
-<<<<<<< HEAD
-=======
 import GambarBuku from "../assets/book.png"
->>>>>>> c118a046a7fcf4b2706cedc5bf05cb7b96739520
 
 const Navbar = () => {
 
@@ -77,13 +74,8 @@ const Navbar = () => {
             <div className="h-[88px] w-full bg-[#EB0019] fixed">
                 <div className="flex relative">
                 <Link to='/input-task'>
-<<<<<<< HEAD
-                     <div class="flex">
-                         {/* <img class="h-9 mr-1 lg:mr-3 " alt="Flowbite Logo" /> */}
-=======
                      <div href="httpsflowbite.com/" class="flex pl-2 mt-6">
                          <img src={GambarBuku} class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
->>>>>>> c118a046a7fcf4b2706cedc5bf05cb7b96739520
                          <span class="self-center text-[24px] font-semibold whitespace-nowrap dark:text-white text-white">My Task</span>
                      </div>
                  </Link>
