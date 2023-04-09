@@ -1,5 +1,5 @@
 import Users from "../models/UserModel.js"; 
-import argon2 from "argon2";
+import bcrypt from "bcrypt";
 
 export const getUsers = async (req, res) => {
     try {
@@ -29,7 +29,8 @@ export const getUsersById = async (req, res) => {
 export const createUsers = async (req, res) => {
     const {name, email, password, confPassword, role} = req.body;
     if(password !== confPassword) return res.status(400).json({msg: "Password dan Confirm Password tidak cocok"});
-    const hashPassword = await argon2.hash(password);
+    const salt = await bcrypt.genSalt();
+    const hashPassword = await bcrypt.hash(password, salt);
     try {
         await Users.create({
             name: name,
@@ -52,10 +53,11 @@ export const updateUsers = async(req, res) => {
     if(!user) return res.status(404).json({msg: "user tidak ditemukan"});
     const {name, email, password, confPassword, role} = req.body;
     let hashPassword;
+    const salt = await bcrypt.genSalt();
     if(password === "" || password === null){
         hashPassword = user.password
     }else{
-        hashPassword = await argon2.hash(password);
+        hashPassword = await bcrypt.hash(password, salt);
     }
     if(password !== confPassword) return res.status(400).json({msg: "Password dan Confirm Password tidak cocok"});
     try {
@@ -103,10 +105,11 @@ export const changePassword = async(req, res) => {
     if(!user) return res.status(404).json({msg: "user tidak ditemukan"});
     const {password, confPassword} = req.body;
     let hashPassword;
+    const salt = await bcrypt.genSalt();
     if(password === "" || password === null){
         hashPassword = user.password
     }else{
-        hashPassword = await argon2.hash(password);
+        hashPassword = await bcrypt.hash(password, salt);
     }
     if(password !== confPassword) return res.status(400).json({msg: "Password dan Confirm Password tidak cocok"});
     try {

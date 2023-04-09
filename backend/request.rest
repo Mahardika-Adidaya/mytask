@@ -3,7 +3,7 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "name": "admin",
+    "name": "admin1",
     "email": "admin@gmail.com",
     "password": "123456",
     "confPassword": "123456",
@@ -32,15 +32,15 @@ GET http://localhost:5000/users/869d8c30-e209-42db-a804-0c65f9eed155
 
 ###
 //update user
-PATCH http://localhost:5000/users/1acdec5d-eaf4-4c7f-a9c4-2ab1d8739305
+PATCH http://localhost:5000/users/74de20ce-b23b-4341-80ee-ccaefb953cbd
 Content-Type: application/json
 
 {
-    "name": "allam user update",
-    "email": "user@gmail.com",
+    "name": "allam admin update",
+    "email": "admin1@gmail.com",
     "password": "",
     "confPassword": "",
-    "role": "user"
+    "role": "admin"
 }
 
 ###
@@ -55,7 +55,7 @@ Content-Type: application/json
 
 {
     "email": "admin@gmail.com",
-    "password": "123456"
+    "password": "121212"
 }
 
 ###
@@ -64,7 +64,7 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "use2@gmail.com",
+    "email": "user3@gmail.com",
     "password": "123456"
 }
 
@@ -121,7 +121,7 @@ DELETE http://localhost:5000/task/362cb2af-3d45-4f0e-91cb-b585bf2d2ce7
 
 ###
 //change-password
-PATCH http://localhost:5000/change-password/7cd28f5a-e5f8-4c7c-8473-3281b99598d9
+PATCH http://localhost:5000/change-password/b7e60b99-8430-4a73-8729-7b8be4588b53
 Content-Type: application/json
 
 {

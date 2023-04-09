@@ -1,21 +1,24 @@
 import User from "../models/UserModel.js";
-import argon2 from "argon2";
+import bcrypt from "bcrypt";
 
 export const Login = async (req, res) =>{
-    const user = await User.findOne({
-        where: {
-            email: req.body.email
-        }
-    });
-    if(!user) return res.status(404).json({msg: "user tidak ditemukan"});
-    const match = await argon2.verify(user.password, req.body.password);
-    if(!match) return res.status(400).json({msg: "wrong password"});
-    req.session.userId = user.uuid;
-    const uuid = user.uuid;
-    const name = user.name;
-    const email = user.email;
-    const role = user.role;
-    res.status(200).json({uuid, name, email, role});
+    try {
+        const user = await User.findOne({
+            where: {
+                email: req.body.email
+            }
+        });
+        const match = await bcrypt.compare(req.body.password, user.password);
+        if(!match) return res.status(400).json({msg: "wrong password"});
+        req.session.userId = user.uuid;
+        const uuid = user.uuid;
+        const name = user.name;
+        const email = user.email;
+        const role = user.role;
+        res.status(200).json({uuid, name, email, role});
+    } catch (error) {
+        res.status(404).json({msg: "user tidak ditemukan"});
+    }
 }
 
 export const Me = async (req, res) => {
