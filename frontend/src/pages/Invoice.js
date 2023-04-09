@@ -152,7 +152,7 @@ const Invoice = () => {
                               <h1>{formatDateString(item.end)}</h1>
                             </div>
                           </td>
-                          <td class="px-6 py-4">Project 1</td>
+                          <td class="px-6 py-4">{item.project}</td>
                           <td class="px-6 py-4">{item.taskDescription}</td>
                           <td class="px-6 py-4">
                             {item.durasi}
@@ -164,8 +164,11 @@ const Invoice = () => {
                     Object.values(afterFilter).map((item, idx) => (
                         <tr key={item.id} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-3 py-4 font-medium text-gray-900  dark:text-white">{idx + 1}</th>
-                          <td class="px-6 py-4">{item.date} {item.start.substring(0, 5)}</td>
-                          <td class="px-6 py-4">Project 1</td>
+                          <td class="px-6 py-4">
+                              <h1>{formatDateString(item.start)}</h1>
+                              <h1>{formatDateString(item.end)}</h1>
+                          </td>
+                          <td class="px-6 py-4">{item.project}</td>
                           <td class="px-6 py-4">{item.taskDescription}</td>
                           <td class="px-6 py-4">{item.durasi}</td>
                         </tr>
@@ -175,7 +178,7 @@ const Invoice = () => {
             </div>
           </div>
 
-          <div className="pr-4">
+          {/* <div className="pr-4">
             <div className="flex relative text-[16px] font-medium mt-[16px]">
               <h1>Total Work Duration</h1>
               <h1 className="absolute right-0">{durasi}</h1>
@@ -194,7 +197,7 @@ const Invoice = () => {
               </div>
               <h1 className="absolute right-0">{durasi}</h1>
             </div>
-          </div>
+          </div> */}
 
           <h1 className="mt-[16px] font-medium">
           <div className="flex text-[15px] font-medium gap-1">
